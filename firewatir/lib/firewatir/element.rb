@@ -681,7 +681,7 @@ module FireWatir
       elsif target.kind_of? String
         self.text.index(target)
       else
-        raise TypeError, "Argument #{target} should be a string or regexp."
+        raise TypeError, "Argument #{target} should be a String or Regexp."
       end
     end
 
