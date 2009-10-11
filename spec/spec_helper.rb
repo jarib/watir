@@ -12,4 +12,5 @@ else
   WatirSpec.persistent_browser = true
 end
 
+include Watir
 include Watir::Exception
