@@ -16,6 +16,10 @@ module Watir
           how = :value
         end
 
+        unless [String, Regexp, Fixnum].any? { |klass| what.kind_of?(klass) }
+          raise TypeError, "expected [String, Regexp, Fixnum], got #{what.inspect}:#{what.class}"
+        end
+
         @specifiers[how] = what
       end
     end
