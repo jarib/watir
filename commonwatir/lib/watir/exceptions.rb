@@ -9,7 +9,11 @@ module Watir
     end
     
     # This exception is thrown if an attempt is made to access an object that doesn't exist
-    class UnknownObjectException < WatirException; end
+    class UnknownObjectException < WatirException
+      def initialize(klass, how, what)
+        super("Unable to locate #{klass.name[/::(.*)$/, 1]}, using #{how.inspect} and #{what.inspect}")
+      end
+    end
     # This exception is thrown if an attempt is made to access an object that is in a disabled state
     class ObjectDisabledException   < WatirException; end
     # This exception is thrown if an attempt is made to access a frame that cannot be found 
@@ -37,12 +41,5 @@ module Watir
       end 
       attr_reader :duration, :timeout
     end
-
-    # Return an error message for when unable to locate the element
-    def self.message_for_unable_to_locate(how, what)
-      result = "using #{how.inspect}"
-      result << ", #{what.inspect}" if what
-      "Unable to locate element, #{result}"
-    end    
   end
 end

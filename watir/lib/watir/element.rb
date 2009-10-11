@@ -52,8 +52,7 @@ module Watir
     def assert_exists
       locate if respond_to?(:locate)
       unless ole_object
-        raise UnknownObjectException.new(
-          Watir::Exception.message_for_unable_to_locate(@how, @what))
+        raise UnknownObjectException.new(self.class, @how, @what)
       end
     end
     def assert_enabled

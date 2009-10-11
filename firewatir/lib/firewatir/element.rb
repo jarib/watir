@@ -901,8 +901,7 @@ module FireWatir
     #
     def assert_exists
       unless exists?
-        raise UnknownObjectException.new(
-                                         Watir::Exception.message_for_unable_to_locate(@how, @what))
+        raise UnknownObjectException.new(self.class, @how, @what)
       end
     end
 
