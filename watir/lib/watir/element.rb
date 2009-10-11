@@ -72,8 +72,6 @@ module Watir
     def_wrap_guard :value
     # return the title of the element
     def_wrap_guard :title
-    # return the style of the element
-    def_wrap_guard :style
     
     def_wrap_guard :alt
     def_wrap_guard :src
@@ -91,6 +89,11 @@ module Watir
     def_wrap :unique_number, :uniqueNumber
     # Return the outer html of the object - see http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/outerhtml.asp?frame=true
     def_wrap :html, :outerHTML
+
+    def style
+      assert_exists
+      ole_object.invoke("style").cssText.downcase rescue ''
+    end
 
     # return the text before the element
     def before_text # label only
