@@ -424,6 +424,7 @@ module Watir
     # Make the window come to the front
     def bring_to_front
       autoit.WinActivate title, ''
+      true
     end
     
     def front?
