@@ -72,7 +72,7 @@ module Watir
     # If the Disk cache is full (tools menu -> Internet options -> Temporary Internet Files), it may produce incorrect responses.
     def loaded?
       locate
-      raise UnknownObjectException, "Unable to locate image using #{@how} and #{@what}" if @o == nil
+      raise UnknownObjectException.new(self.class, @how, @what) if @o.nil?
       return false if @o.fileCreatedDate == "" and @o.fileSize.to_i == -1
       return true
     end

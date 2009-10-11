@@ -53,8 +53,7 @@ module FireWatir
     #
     def assert_exists
       unless @option
-        raise UnknownObjectException,  
-                "Unable to locate an option using #{@how} and #{@what}"
+        raise UnknownObjectException.new(self.class, @how, @what)
       end
     end
     private :assert_exists

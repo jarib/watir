@@ -121,7 +121,7 @@ module Watir
     # Is the specified option (text) selected? Raises exception of option does not exist.
     def selected? text_or_regexp
       unless includes? text_or_regexp
-        raise UnknownObjectException, "Option #{text_or_regexp.inspect} not found."
+        raise UnknownObjectException.new(Option, :text, text_or_regexp)
       end
 
       getSelectedItems.grep(text_or_regexp).size > 0
@@ -176,8 +176,7 @@ module Watir
     end
     def assert_exists
       unless @option
-        raise UnknownObjectException,
-                    "Unable to locate an option using #{@how} and #{@what}"
+        raise UnknownObjectException.new(self.class, @how, @what)
       end
     end
     private :assert_exists
@@ -264,7 +263,7 @@ module Watir
       assert_exists
       destination = @container.text_field(destination_how, destination_what)
       unless destination.exists?
-        raise UnknownObjectException, "Unable to locate destination using #{destination_how } and #{destination_what } "
+        raise UnknownObjectException.new(self.class, destination_how, destination_what)
       end
       
       @o.focus
