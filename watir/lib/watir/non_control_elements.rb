@@ -12,6 +12,7 @@ module Watir
       method_name = class_name.underscore
       Watir::Container.module_eval <<-RUBY
         def #{method_name}(how, what=nil)
+          how, what = process_default :id, how, what
           return #{class_name}.new(self, how, what)
         end
       RUBY

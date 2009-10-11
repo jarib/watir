@@ -129,6 +129,7 @@ module Watir
     #
     # returns a Table object
     def table(how, what=nil)
+      how, what = process_default :id, how, what
       Table.new(self, how, what)
     end 
     
@@ -150,6 +151,7 @@ module Watir
     #
     # returns a TableCell Object
     def cell(how, what=nil)
+      how, what = process_default :id, how, what
       TableCell.new(self, how, what)
     end
     def cells
@@ -163,6 +165,7 @@ module Watir
     #
     # returns a TableRow object
     def row(how, what=nil)
+      how, what = process_default :id, how, what
       TableRow.new(self, how, what)
     end
     def rows
@@ -243,6 +246,7 @@ module Watir
     #    ie.file_field(:index, 2)                         # access the second file upload on the page (1 based, so the first field is accessed with :index,1)
     #
     def file_field(how, what=nil)
+      how, what = process_default :name, how, what
       FileField.new(self, how, what)
     end
     
@@ -272,6 +276,7 @@ module Watir
     #    ie.text_field(:index, 2)                          # access the second text field on the page (1 based, so the first field is accessed with :index,1)
     #    ie.text_field(:xpath, "//textarea[@id='user_name']/")    # access the text field with an ID of user_name
     def text_field(how, what=nil)
+      how, what = process_default :name, how, what
       TextField.new(self, how, what)
     end
     
@@ -302,6 +307,7 @@ module Watir
     #    ie.hidden(:index, 2)                         # access the second hidden field on the page (1 based, so the first field is accessed with :index,1)
     #    ie.hidden(:xpath, "//input[@type='hidden' and @id='session_value']/")    # access the hidden field with an ID of session_id
     def hidden(how, what=nil)
+      how, what = process_default :name, how, what
       Hidden.new(self, how, what)
     end
     
@@ -332,6 +338,7 @@ module Watir
     #    ie.select_list(:index, 2)                         # access the second select box on the page (1 based, so the first field is accessed with :index,1)
     #    ie.select(:xpath, "//select[@id='currency']/")    # access the select box with an id of currency
     def select_list(how, what=nil)
+      how, what = process_default :name, how, what
       SelectList.new(self, how, what)
     end
     
@@ -375,6 +382,7 @@ module Watir
     #    ie.checkbox(:name,'email_frequency', 'weekly')    # access the check box with a name of email_frequency and a value of 'weekly'
     #    ie.checkbox(:xpath, "//input[@name='email_frequency' and @value='daily']/")     # access the checkbox with a name of email_frequency and a value of 'daily'
     def checkbox(how, what=nil, value=nil) # should be "check_box" ?
+      how, what = process_default :name, how, what
       CheckBox.new(self, how, what, value)
     end
     
@@ -417,6 +425,7 @@ module Watir
     #    ie.radio(:name,'email_frequency', 'weekly')     # access the radio button with a name of email_frequency and a value of 'weekly'
     #    ie.radio(:xpath, "//input[@name='email_frequency' and @value='daily']/")     # access the radio button with a name of email_frequency and a value of 'daily'
     def radio(how, what=nil, value=nil)
+      how, what = process_default :name, how, what
       Radio.new(self, how, what, value)
     end
     
@@ -449,6 +458,7 @@ module Watir
     #   ie.link(:text, 'Click Me')          # access the link that has Click Me as its text
     #   ie.link(:xpath, "//a[contains(.,'Click Me')]/")      # access the link with Click Me as its text
     def link(how, what=nil)
+      how, what = process_default :href, how, what
       Link.new(self, how, what)
     end
     
@@ -512,6 +522,7 @@ module Watir
     #   ie.map(:title, "A Picture")         # access a map using the tooltip text. See http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/title_1.asp?frame=true
     #    
     def map(how, what=nil)
+      how, what = process_default :id, how, what
       return Map.new(self, how, what)
     end
     
@@ -544,6 +555,7 @@ module Watir
     #   ie.area(:title, "A Picture")         # access a area using the tooltip text. See http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/title_1.asp?frame=true
     #    
     def area(how, what=nil)
+      how, what = process_default :id, how, what
       return Area.new(self, how, what)
     end
     
@@ -578,6 +590,7 @@ module Watir
     #   ie.image(:xpath, "//img[@alt='A Picture']/")    # access an image using the alt text
     #
     def image(how, what=nil)
+      how, what = process_default :id, how, what
       Image.new(self, how, what)
     end
     
