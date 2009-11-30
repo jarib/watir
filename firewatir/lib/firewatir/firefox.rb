@@ -319,6 +319,25 @@ module FireWatir
       end
     end
 
+    # Closes all firefox windows
+    def close_all
+        total_windows = js_eval("getWindows().length").to_i
+
+        # start from last window  
+        while(total_windows > 0) do
+            js_eval "getWindows()[#{total_windows - 1}].close()"
+            total_windows = total_windows - 1
+        end    
+
+        if current_os == :macosx
+            %x{ osascript -e 'tell application "Firefox" to quit' }
+        end  
+
+        if current_os == :windows
+            system("taskkill /im Firefox.exe /f /t >nul 2>&1")
+        end
+    end
+
     #   Used for attaching pop up window to an existing Firefox window, either by url or title.
     #   ff.attach(:url, 'http://www.google.com')
     #   ff.attach(:title, 'Google')
@@ -457,7 +476,7 @@ module FireWatir
     #
     def status
       js_status = js_eval("#{window_var}.status")
-      js_status.empty? ? js_eval("#{WINDOW_VAR}.XULBrowserWindow.statusText;") : js_status
+      js_status.empty? ? js_eval("#{window_var}.XULBrowserWindow.statusText;") : js_status
     end
 
 
@@ -681,7 +700,7 @@ module FireWatir
 
     # Returns the document element of the page currently loaded in the browser.
     def document
-      Document.new("#{document_var}")
+      Document.new(self)
     end
 
     # Returns the first element that matches the given xpath expression or query.
